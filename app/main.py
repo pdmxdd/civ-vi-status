@@ -32,9 +32,16 @@ def get_status():
 @app.route('/status', methods=['POST'])
 def post_status():
     if request.json is not None:
+        game_json = {}
+        if "value1" in request.json.keys():
+            game_json["name"] = request.json["value1"]
+        if "value2" in request.json.keys():
+            game_json["player"] = request.json["value2"]
+        if "value3" in request.json.keys():
+            game_json["turn"] = request.json["value3"]
         with open('status.json', 'w') as wf:
-            json.dump(request.json, wf)
-        return make_json_response(json.dumps(request.json), 201)
+            json.dump(game_json, wf)
+        return make_json_response(json.dumps(game_json), 201)
     return make_json_response(json.dumps({"error": "json not included with request"}), 400)
 
 
