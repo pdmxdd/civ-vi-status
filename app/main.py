@@ -1,4 +1,4 @@
-from flask import Flask, make_response, request
+from flask import Flask, make_response, request, render_template
 import json
 
 app = Flask(__name__)
@@ -16,7 +16,7 @@ def make_json_response(the_json, status_code):
 
 @app.route('/', methods=['GET'])
 def index():
-    return 'INDEX'
+    return render_template("index.html")
 
 
 @app.route('/status', methods=['GET'])
